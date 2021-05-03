@@ -28,7 +28,6 @@ class Customtxtinput extends StatelessWidget {
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
           borderSide: BorderSide(
             color: Colors.black12,
             width: 1.0,

@@ -9,15 +9,19 @@ class PhoneSignUpScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
+              SizedBox(
+                height: 16,
+              ),
               Image.asset(
                 'assets/images/digitourslogo.png',
+                height: 60,
+              ),
+              SizedBox(
+                height: 16,
               ),
               Align(
                 alignment: Alignment.center,
@@ -26,15 +30,14 @@ class PhoneSignUpScreen extends StatelessWidget {
                   height: 400,
                 ),
               ),
-              Spacer(),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   'Use your phone number to get started',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(fontSize: 25, color: Colors.black),
+                  style: Theme.of(context).textTheme.headline1.copyWith(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
               SizedBox(

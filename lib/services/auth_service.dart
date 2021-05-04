@@ -12,10 +12,12 @@ class AuthService extends ChangeNotifier {
   }
 
   Future mobileLogin(String phoneNumber) {
+    postingMobileLogin = true;
     return api.mobilelogin(phoneNumber).then((response) {
       var payload = response.data;
       print(payload);
     }).catchError((error) {
+      postingMobileLogin = false;
       printError('Error occured while confirming login phone number $error');
     });
   }

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class PhoneSignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _phoneInputController = TextEditingController();
+    TextEditingController _phoneInputController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(

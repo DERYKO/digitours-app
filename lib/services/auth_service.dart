@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 class AuthService extends ChangeNotifier {
   bool _postingMobileLogin = false;
   bool get postingMobileLogin => _postingMobileLogin;
+  String phoneNumber;
 
   set postingMobileLogin(bool val) {
     _postingMobileLogin = val;
@@ -12,8 +13,10 @@ class AuthService extends ChangeNotifier {
   }
 
   Future mobileLogin(String phoneNumber) {
+    phoneNumber = '';
     postingMobileLogin = true;
     return api.mobilelogin(phoneNumber).then((response) {
+      phoneNumber = phoneNumber;
       var payload = response.data;
       print(payload);
       postingMobileLogin = false;
@@ -21,6 +24,27 @@ class AuthService extends ChangeNotifier {
     }).catchError((error) {
       postingMobileLogin = false;
       printError('Error occured while confirming login phone number $error');
+    });
+  }
+
+  bool _verifyingPhoneNumber = false;
+  bool get verifyingPhoneNumber => _verifyingPhoneNumber;
+
+  set verifyingPhoneNumber(bool val) {
+    _verifyingPhoneNumber = false;
+    notifyListeners();
+  }
+
+  Future verifyPhoneNumber(String phoneNumber, String code) {
+    verifyingPhoneNumber = true;
+    return api.verifyPhone(phoneNumber, code).then((response) {
+      var payload = response.data;
+
+      print(payload);
+      verifyingPhoneNumber = false;
+    }).catchError((error) {
+      verifyingPhoneNumber = false;
+      print('ERROR OCCURED WHILE VERIFYING PHONE NUMBER');
     });
   }
 }

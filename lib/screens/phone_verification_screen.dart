@@ -15,14 +15,6 @@ class PhoneVerificationScreen extends StatefulWidget {
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   final TextEditingController _verifictaionCode = TextEditingController();
 
-  void submitMobile() {
-    Navigator.of(context)
-        .pushReplacementNamed(RouteConfig.phoneverificationscreen);
-    // authservice.mobileLogin(_verifictaionCode.text).then((value) =>
-    //     Navigator.of(context)
-    //         .pushReplacementNamed(RouteConfig.phoneverificationscreen));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +50,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                             fontWeight: FontWeight.w400),
                       ),
                       Text(
-                        'Enter the 4-digit code sent to \n 073994357',
+                        'Enter the 4-digit code sent to \n ${authservice.phoneNumber}',
                         style: Theme.of(context)
                             .textTheme
                             .headline4
@@ -76,13 +68,23 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       ),
                       Selector<AuthService, bool>(
                         selector: (context, authservice) =>
-                            authservice.postingMobileLogin,
-                        builder: (context, postedLogin, _) {
+                            authservice.verifyingPhoneNumber,
+                        builder: (context, verified, _) {
                           return CustomRoundedFlatBtn(
                               color: Colors.blueAccent,
-                              onTap: !postedLogin ? submitMobile : null,
+                              onTap: !verified
+                                  ? () {
+                                      authservice
+                                          .verifyPhoneNumber(
+                                              authservice.phoneNumber,
+                                              _verifictaionCode.text)
+                                          .then((value) => Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  RouteConfig.homescreen));
+                                    }
+                                  : null,
                               btnWidget: CircularMaterialSpinner(
-                                loading: postedLogin,
+                                loading: verified,
                                 child: Text('Verify'),
                               ),
                               labelText: 'Confirm Number');

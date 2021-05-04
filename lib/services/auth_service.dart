@@ -16,6 +16,8 @@ class AuthService extends ChangeNotifier {
     return api.mobilelogin(phoneNumber).then((response) {
       var payload = response.data;
       print(payload);
+      postingMobileLogin = false;
+      return payload;
     }).catchError((error) {
       postingMobileLogin = false;
       printError('Error occured while confirming login phone number $error');

@@ -1,3 +1,4 @@
+import 'package:digitours/routes.dart';
 import 'package:digitours/services/auth_service.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
@@ -66,8 +67,12 @@ class PhoneSignUpScreen extends StatelessWidget {
                               color: Colors.blueAccent,
                               onTap: !postedLogin
                                   ? () {
-                                      authservice.mobileLogin(
-                                          _phoneInputController.text);
+                                      authservice
+                                          .mobileLogin(
+                                              _phoneInputController.text)
+                                          .then((value) => Navigator.of(context)
+                                              .pushReplacementNamed(RouteConfig
+                                                  .phoneverificationscreen));
                                     }
                                   : null,
                               btnWidget: CircularMaterialSpinner(

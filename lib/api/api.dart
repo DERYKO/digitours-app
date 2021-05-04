@@ -7,6 +7,11 @@ class Api extends DioApi {
   Future mobilelogin(String phoneNumber) {
     return dio.post('/login', queryParameters: {'phone': phoneNumber});
   }
+
+  Future verifyPhone(String phoneNumber, String code) {
+    return dio
+        .post('/code', queryParameters: {'code': code, 'phone': phoneNumber});
+  }
 }
 
 Api api = Api();

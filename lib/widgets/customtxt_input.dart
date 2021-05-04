@@ -17,6 +17,7 @@ class Customtxtinput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: labelText == null ? '' : labelText,
         filled: fillColor == null ? false : true,

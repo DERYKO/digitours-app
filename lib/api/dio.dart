@@ -17,9 +17,8 @@ class DioApi {
         "REQUEST: ${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters}");
   }
 
-  void _responseIntercept(options) {
-    print(
-        "REQUEST: ${options?.method}: ${options?.baseUrl}${options?.path} ${options?.queryParameters}");
+  void _responseIntercept(response) {
+    print("${response.request?.path} ${response?.data}");
   }
 
   void _errorIntercept(DioError error) {

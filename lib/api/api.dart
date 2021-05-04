@@ -8,3 +8,5 @@ class Api extends DioApi {
     return dio.post('/login', queryParameters: {'phone': phoneNumber});
   }
 }
+
+Api api = Api();

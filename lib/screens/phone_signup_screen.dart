@@ -1,3 +1,4 @@
+import 'package:digitours/services/auth_service.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:digitours/widgets/customtxt_input.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,11 @@ class PhoneSignUpScreen extends StatelessWidget {
               SizedBox(
                 height: 4,
               ),
-              CustomRoundedFlatBtn(onTap: () {}, labelText: 'Confirm Number')
+              CustomRoundedFlatBtn(
+                  onTap: () {
+                    authservice.mobileLogin(_phoneInputController.text);
+                  },
+                  labelText: 'Confirm Number')
             ],
           ),
         ),

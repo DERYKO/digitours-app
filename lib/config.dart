@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Config {
+  static String appUrl = "https://digitours.co.ke/mobile";
   static ThemeData themedata = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primarySwatch: Colors.blue,

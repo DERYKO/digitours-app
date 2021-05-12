@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 class AuthService extends ChangeNotifier {
   bool _postingMobileLogin = false;
   bool get postingMobileLogin => _postingMobileLogin;
-  String phoneNumber;
+  String sentPhoneNumber;
 
   set postingMobileLogin(bool val) {
     _postingMobileLogin = val;
@@ -13,10 +13,10 @@ class AuthService extends ChangeNotifier {
   }
 
   Future mobileLogin(String phoneNumber) {
-    phoneNumber = '';
     postingMobileLogin = true;
+    sentPhoneNumber = phoneNumber;
+
     return api.mobilelogin(phoneNumber).then((response) {
-      phoneNumber = phoneNumber;
       var payload = response.data;
       print(payload);
       postingMobileLogin = false;

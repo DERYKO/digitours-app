@@ -11,7 +11,7 @@ class CustomRoundedFlatBtn extends StatelessWidget {
   const CustomRoundedFlatBtn(
       {Key key,
       @required this.onTap,
-      @required this.labelText,
+      this.labelText,
       this.btnWidget,
       this.height,
       this.color = Colors.blue,

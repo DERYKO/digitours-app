@@ -6,10 +6,16 @@ import 'package:digitours/widgets/customtxt_input.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PhoneSignUpScreen extends StatelessWidget {
+class PhoneSignUpScreen extends StatefulWidget {
+  @override
+  _PhoneSignUpScreenState createState() => _PhoneSignUpScreenState();
+}
+
+class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
+  TextEditingController _phoneInputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _phoneInputController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -78,8 +84,7 @@ class PhoneSignUpScreen extends StatelessWidget {
                               btnWidget: CircularMaterialSpinner(
                                 loading: postedLogin,
                                 child: Text('Confirm Number'),
-                              ),
-                              labelText: 'Confirm Number');
+                              ));
                         },
                       )
                     ],

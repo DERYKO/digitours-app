@@ -50,7 +50,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                             fontWeight: FontWeight.w400),
                       ),
                       Text(
-                        'Enter the 4-digit code sent to \n ${authservice.phoneNumber}',
+                        'Enter the 4-digit code sent to \n ${authservice.sentPhoneNumber}',
                         style: Theme.of(context)
                             .textTheme
                             .headline4
@@ -76,7 +76,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                   ? () {
                                       authservice
                                           .verifyPhoneNumber(
-                                              authservice.phoneNumber,
+                                              authservice.sentPhoneNumber,
                                               _verifictaionCode.text)
                                           .then((value) => Navigator.of(context)
                                               .pushReplacementNamed(
@@ -86,8 +86,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                               btnWidget: CircularMaterialSpinner(
                                 loading: verified,
                                 child: Text('Verify'),
-                              ),
-                              labelText: 'Confirm Number');
+                              ));
                         },
                       )
                     ],

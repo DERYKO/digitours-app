@@ -79,8 +79,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                               authservice.sentPhoneNumber,
                                               _verifictaionCode.text)
                                           .then((value) => Navigator.of(context)
-                                              .pushReplacementNamed(
-                                                  RouteConfig.homescreen));
+                                              .pushReplacementNamed(RouteConfig
+                                                  .personalizescreen));
                                     }
                                   : null,
                               btnWidget: CircularMaterialSpinner(

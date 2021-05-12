@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigate() async {
     await Future.delayed(Duration(seconds: 1));
-    Navigator.of(context).pushNamed(RouteConfig.phonesignupscreen);
+    Navigator.of(context).pushNamed(RouteConfig.onboardingscreen);
   }
 
   @override

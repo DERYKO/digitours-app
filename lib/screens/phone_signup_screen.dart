@@ -29,9 +29,12 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    'assets/images/digitourslogo.png',
-                    height: 60,
+                  Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      'assets/images/digitourslogo.png',
+                      height: 60,
+                    ),
                   ),
                   Image.asset(
                     'assets/images/beach_suitcase_icon.png',

@@ -71,7 +71,7 @@ class _PersonalIzeScreenState extends State<PersonalIzeScreen> {
                   child: CustomRoundedFlatBtn(
                     onTap: () {
                       Navigator.of(context)
-                          .pushReplacementNamed(RouteConfig.homescreen);
+                          .pushReplacementNamed(RouteConfig.namemailregscreen);
                     },
                     btnWidget: Text('Complete'),
                   ),

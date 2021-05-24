@@ -1,3 +1,4 @@
+import 'package:digitours/routes.dart';
 import 'package:digitours/screens/phone_signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,12 @@ class _LogoDisplayScreenState extends State<LogoDisplayScreen> {
 
   void navigate() async {
     await Future.delayed(Duration(seconds: 2));
-    // Navigator.of(context).pushReplacementNamed(RouteConfig.phonesignupscreen);
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-            transitionDuration: Duration(seconds: 2),
-            pageBuilder: (_, __, ___) => PhoneSignUpScreen()));
+    Navigator.of(context).pushReplacementNamed(RouteConfig.phonesignupscreen);
+    // Navigator.push(
+    //     context,
+    //     PageRouteBuilder(
+    //         transitionDuration: Duration(seconds: 2),
+    //         pageBuilder: (_, __, ___) => PhoneSignUpScreen()));
   }
 
   @override
@@ -28,12 +29,10 @@ class _LogoDisplayScreenState extends State<LogoDisplayScreen> {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Hero(
-              tag: 'logo',
-              child: Image.asset(
-                'assets/images/digitourslogo.png',
-                height: 100,
-              )),
+          child: Image.asset(
+            'assets/images/digitourslogo.png',
+            height: 100,
+          ),
         ),
       ),
     );

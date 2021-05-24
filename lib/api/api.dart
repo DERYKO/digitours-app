@@ -12,6 +12,13 @@ class Api extends DioApi {
     return dio
         .post('/code', queryParameters: {'code': code, 'phone': phoneNumber});
   }
+
+  Future updateProfile(String name, String email) {
+    return dio.post('/user', data: {
+      "name": name,
+      "email": email,
+    });
+  }
 }
 
 Api api = Api();

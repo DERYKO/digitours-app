@@ -16,8 +16,6 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
 
   void _onPhoneConfirmedFn() {
     authservice.mobileLogin(_phoneInputController.text).then((value) {
-      print('value is $value');
-
       if (value != null) {
         Navigator.of(context)
             .pushReplacementNamed(RouteConfig.phoneverificationscreen);

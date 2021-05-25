@@ -72,6 +72,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       ),
                       Customtxtinput(
                         controller: _verifictaionCode,
+                        textinputtype: TextInputType.phone,
                         fillColor: Colors.grey.withOpacity(.1),
                       ),
                       SizedBox(
@@ -81,6 +82,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         selector: (context, authservice) =>
                             authservice.verifyingPhoneNumber,
                         builder: (context, verified, _) {
+                          print('verified is $verified');
                           return CustomRoundedFlatBtn(
                               color: Colors.blueAccent,
                               onTap: !verified

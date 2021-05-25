@@ -9,6 +9,7 @@ class AuthModel {
     this.email,
     this.name,
     this.deviceToken,
+    this.userId,
   });
 
   @HiveField(1)
@@ -19,22 +20,26 @@ class AuthModel {
   final String name;
   @HiveField(4)
   final String deviceToken;
+  @HiveField(5)
+  final int userId;
 
   Map<String, dynamic> toMap() {
     return {
       'phoneNumber': phoneNumber,
       'email': email,
       'name': name,
+      'userId': userId
     };
   }
 
-  factory AuthModel.fromuserdata(Map<String, dynamic> userdata) {
+  factory AuthModel.fromMap(Map<String, dynamic> userdata) {
     if (userdata == null) return null;
     return AuthModel(
       phoneNumber: userdata['phoneNumber'],
       email: userdata['email'],
       name: userdata['name'],
       deviceToken: userdata['deviceToken'],
+      userId: userdata['id'],
     );
   }
 }

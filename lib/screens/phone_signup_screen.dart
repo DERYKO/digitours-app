@@ -70,6 +70,7 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       Customtxtinput(
                         controller: _phoneInputController,
                         fillColor: Colors.grey.withOpacity(.1),
+                        textinputtype: TextInputType.phone,
                       ),
                       SizedBox(
                         height: 4,

@@ -5,12 +5,14 @@ class Customtxtinput extends StatelessWidget {
   final Color fillColor;
   final String labelText;
   final String hintText;
+  final TextInputType textinputtype;
 
   const Customtxtinput(
       {Key key,
       @required this.controller,
       this.labelText,
       this.hintText,
+      this.textinputtype,
       this.fillColor})
       : super(key: key);
 
@@ -18,6 +20,7 @@ class Customtxtinput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardType: textinputtype,
       decoration: InputDecoration(
         labelText: labelText == null ? '' : labelText,
         filled: fillColor == null ? false : true,

@@ -46,9 +46,8 @@ class AuthService extends ChangeNotifier {
     verifyingPhoneNumber = true;
     return api.verifyPhone(phoneNumber, code).then((response) {
       var payload = response.data;
-
-      print(payload);
       verifyingPhoneNumber = false;
+      return payload;
     }).catchError((error) {
       verifyingPhoneNumber = false;
       print('ERROR OCCURED WHILE VERIFYING PHONE NUMBER');

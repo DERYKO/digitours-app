@@ -15,6 +15,17 @@ class PhoneVerificationScreen extends StatefulWidget {
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   final TextEditingController _verifictaionCode = TextEditingController();
 
+  void verifyBtnFn() {
+    authservice
+        .verifyPhoneNumber(authservice.sentPhoneNumber, _verifictaionCode.text)
+        .then((value) {
+      if (value != null) {
+        Navigator.of(context)
+            .pushReplacementNamed(RouteConfig.personalizescreen);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,18 +85,19 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                               color: Colors.blueAccent,
                               onTap: !verified
                                   ? () {
-                                      authservice
-                                          .verifyPhoneNumber(
-                                              authservice.sentPhoneNumber,
-                                              _verifictaionCode.text)
-                                          .then((value) => Navigator.of(context)
-                                              .pushReplacementNamed(RouteConfig
-                                                  .personalizescreen));
+                                      verifyBtnFn();
                                     }
                                   : null,
                               btnWidget: CircularMaterialSpinner(
                                 loading: verified,
-                                child: Text('Verify'),
+                                child: Text(
+                                  'VERIFY',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline1
+                                      .copyWith(
+                                          fontSize: 14, color: Colors.white),
+                                ),
                               ));
                         },
                       )

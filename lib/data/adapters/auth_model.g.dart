@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../model/auth_model.dart';
+part of 'auth_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -22,13 +22,14 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
       name: fields[3] as String,
       deviceToken: fields[4] as String,
       userId: fields[5] as int,
+      imgUrl: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AuthModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(1)
       ..write(obj.phoneNumber)
       ..writeByte(2)
@@ -38,7 +39,9 @@ class AuthModelAdapter extends TypeAdapter<AuthModel> {
       ..writeByte(4)
       ..write(obj.deviceToken)
       ..writeByte(5)
-      ..write(obj.userId);
+      ..write(obj.userId)
+      ..writeByte(6)
+      ..write(obj.imgUrl);
   }
 
   @override

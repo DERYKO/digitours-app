@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part '../adapters/auth_model.g.dart';
+part 'auth_model.g.dart';
 
 @HiveType(typeId: 0)
 class AuthModel {
@@ -10,6 +10,7 @@ class AuthModel {
     this.name,
     this.deviceToken,
     this.userId,
+    this.imgUrl,
   });
 
   @HiveField(1)
@@ -22,13 +23,16 @@ class AuthModel {
   final String deviceToken;
   @HiveField(5)
   final int userId;
+  @HiveField(6)
+  final String imgUrl;
 
   Map<String, dynamic> toMap() {
     return {
       'phoneNumber': phoneNumber,
       'email': email,
       'name': name,
-      'userId': userId
+      'userId': userId,
+      'imgUrl': imgUrl
     };
   }
 

@@ -18,7 +18,7 @@ class DataBase {
   }
 
   void _registerAdapters() {
-    Hive.registerAdapter(AuthModelAdapter());
+    // Hive.registerAdapter(AuthModelAdapter());
   }
 }
 

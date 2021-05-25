@@ -1,8 +1,13 @@
 import 'package:digitours/api/api.dart';
+import 'package:digitours/data/database.dart';
+import 'package:digitours/data/model/auth_model.dart';
 import 'package:digitours/utils/color_error_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthService extends ChangeNotifier {
+  bool get showOnboardScreens => db.showOnBoardScreenBoolBox.values.first;
+  AuthModel get authUser => db.authBox.get('user');
+
   bool _postingMobileLogin = false;
   bool get postingMobileLogin => _postingMobileLogin;
   String sentPhoneNumber;

@@ -1,5 +1,4 @@
 import 'package:digitours/routes.dart';
-import 'package:digitours/screens/phone_signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class LogoDisplayScreen extends StatefulWidget {

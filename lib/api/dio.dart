@@ -7,6 +7,7 @@ class DioApi {
   DioApi(String apiUrl) {
     dio = Dio();
     dio.options.baseUrl = apiUrl;
+    dio.options.headers = {"Accept": "application/json"};
     dio.interceptors.add(InterceptorsWrapper(onRequest: _requestIntercept));
     dio.interceptors.add(InterceptorsWrapper(onResponse: _responseIntercept));
     dio.interceptors.add(InterceptorsWrapper(onError: _errorIntercept));

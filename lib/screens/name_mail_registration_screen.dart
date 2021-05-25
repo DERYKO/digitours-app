@@ -13,6 +13,12 @@ class NameMailRegScreen extends StatefulWidget {
 class _NameMailRegScreenState extends State<NameMailRegScreen> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+
+  void _submitBtnfunc() {
+    profileupdateservice.updateProfile(
+        _nameController.text, _emailController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +62,7 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
               ),
               CustomRoundedFlatBtn(
                 onTap: () {
-                  profileupdateservice.updateProfile(
-                      _nameController.text, _emailController.text);
+                  _submitBtnfunc();
                 },
                 btnWidget: Selector<ProfileUpdateService, bool>(
                   selector: (context, profileupdateservice) =>

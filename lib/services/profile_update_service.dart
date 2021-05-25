@@ -1,4 +1,7 @@
 import 'package:digitours/api/api.dart';
+import 'package:digitours/data/database.dart';
+import 'package:digitours/data/model/auth_model.dart';
+import 'package:digitours/utils/color_error_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProfileUpdateService extends ChangeNotifier {
@@ -10,16 +13,21 @@ class ProfileUpdateService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateProfile(String name, String email) {
+  Future updateProfile(name, email) {
     isUpdatingProfile = true;
     return api.updateProfile(name, email).then((response) {
       var payload = response.data;
-      print(payload);
-      isUpdatingProfile = false;
+      _saveUserData(payload['user']);
+      return payload;
     }).catchError((error) {
-      print('Error Occured While updating profile $error');
+      printError("ERROR OCCURED WHILE UPDATING USER PROFILE $error");
       isUpdatingProfile = false;
     });
+  }
+
+  void _saveUserData(userdata) {
+    db.authBox.put('user', AuthModel.fromMap(userdata));
+    isUpdatingProfile = false;
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:digitours/data/database.dart';
 import 'package:digitours/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigate() async {
+    await db.init();
     await Future.delayed(Duration(seconds: 1));
     Navigator.of(context).pushNamed(RouteConfig.onboardingscreen);
   }

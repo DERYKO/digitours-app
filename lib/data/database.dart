@@ -8,12 +8,17 @@ class DataBase {
 
   init() async {
     await Hive.initFlutter();
-    await initaliseBoxes();
+    await _initaliseBoxes();
+    _registerAdapters();
   }
 
-  Future initaliseBoxes() async {
+  Future _initaliseBoxes() async {
     authBox = await Hive.openBox('authbox');
     showOnBoardScreenBoolBox = await Hive.openBox('showonboardscreenboolbox');
+  }
+
+  void _registerAdapters() {
+    Hive.registerAdapter(AuthModelAdapter());
   }
 }
 

@@ -14,6 +14,17 @@ class PhoneSignUpScreen extends StatefulWidget {
 class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
   TextEditingController _phoneInputController = TextEditingController();
 
+  void _onPhoneConfirmedFn() {
+    authservice.mobileLogin(_phoneInputController.text).then((value) {
+      print('value is $value');
+
+      if (value != null) {
+        Navigator.of(context)
+            .pushReplacementNamed(RouteConfig.phoneverificationscreen);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,12 +84,7 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                               color: Colors.blueAccent,
                               onTap: !postedLogin
                                   ? () {
-                                      authservice
-                                          .mobileLogin(
-                                              _phoneInputController.text)
-                                          .then((value) => Navigator.of(context)
-                                              .pushReplacementNamed(RouteConfig
-                                                  .phoneverificationscreen));
+                                      _onPhoneConfirmedFn();
                                     }
                                   : null,
                               btnWidget: CircularMaterialSpinner(

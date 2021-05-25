@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DataBase {
-  Box<bool> showOnBoardScreenBoolBox;
+  Box<bool> appSettingsBools;
   Box<AuthModel> authBox;
 
   init() async {
@@ -14,7 +14,7 @@ class DataBase {
 
   Future _initaliseBoxes() async {
     authBox = await Hive.openBox('authbox');
-    showOnBoardScreenBoolBox = await Hive.openBox('showonboardscreenboolbox');
+    appSettingsBools = await Hive.openBox('appsettingsbools');
   }
 
   void _registerAdapters() {

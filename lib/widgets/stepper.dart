@@ -24,8 +24,6 @@ class _StepperWidgetState extends State<StepperWidget> {
         }
       });
     }
-    print(
-        'currentIndex is $currentIndexScreen and screen length is ${widget.screens.length}');
   }
 
   void closeOnBoardingFunc() {
@@ -91,7 +89,7 @@ class StepperIndicator extends StatelessWidget {
                     height: currentIndex == screens.indexOf(e) ? 12 : 10,
                     width: currentIndex == screens.indexOf(e) ? 12 : 10,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey, width: .5),
                       shape: BoxShape.circle,
                       color: currentIndex == screens.indexOf(e)
                           ? Colors.orange

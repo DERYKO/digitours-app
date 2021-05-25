@@ -14,7 +14,7 @@ class _LogoDisplayScreenState extends State<LogoDisplayScreen> {
   }
 
   void navigate() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     Navigator.of(context).pushReplacementNamed(RouteConfig.phonesignupscreen);
     // Navigator.push(
     //     context,

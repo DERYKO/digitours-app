@@ -1,5 +1,6 @@
 import 'package:digitours/data/database.dart';
 import 'package:digitours/routes.dart';
+import 'package:digitours/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigate() async {
     await db.init();
     await Future.delayed(Duration(seconds: 1));
-    Navigator.of(context).pushNamed(RouteConfig.onboardingscreen);
+    if (authservice.showOnboardScreens) {
+      Navigator.of(context).pushReplacementNamed(RouteConfig.onboardingscreen);
+    } else if (authservice.authUser == null) {
+      Navigator.of(context).pushReplacementNamed(RouteConfig.phonesignupscreen);
+    } else {
+      Navigator.of(context).pushReplacementNamed(RouteConfig.homescreen);
+    }
   }
 
   @override

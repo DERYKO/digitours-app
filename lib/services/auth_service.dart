@@ -5,7 +5,8 @@ import 'package:digitours/utils/color_error_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthService extends ChangeNotifier {
-  bool get showOnboardScreens => db.showOnBoardScreenBoolBox.values.first;
+  bool get showOnboardScreens =>
+      db.appSettingsBools.get('showonboardscreens', defaultValue: true);
   AuthModel get authUser => db.authBox.get('user');
 
   bool _postingMobileLogin = false;
@@ -23,6 +24,7 @@ class AuthService extends ChangeNotifier {
 
     return api.mobilelogin(phoneNumber).then((response) {
       var payload = response.data;
+
       print(payload);
       postingMobileLogin = false;
       return payload;

@@ -9,8 +9,8 @@ class DataBase {
 
   init() async {
     await Hive.initFlutter();
-    await _initaliseBoxes();
     _registerAdapters();
+    await _initaliseBoxes();
   }
 
   Future _initaliseBoxes() async {
@@ -20,7 +20,7 @@ class DataBase {
   }
 
   void _registerAdapters() {
-    Hive.registerAdapter(AuthModelAdapter());
+    Hive.registerAdapter<AuthModel>(AuthModelAdapter());
   }
 }
 

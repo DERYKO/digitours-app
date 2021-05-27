@@ -59,6 +59,7 @@ class AuthService extends ChangeNotifier {
 
   void _saveAccessToken(String token) {
     db.accessTokenBox.put('accesstoken', token);
+    db.appSettingsBools.put("showonboardscreens", false);
     verifyingPhoneNumber = false;
   }
 }

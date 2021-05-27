@@ -21,7 +21,7 @@ class Api extends DioApi {
   }
 
   Future getTravelDestinations() {
-    return dio.get('/travel-destintion');
+    return dio.get('/travel-destination');
   }
 }
 

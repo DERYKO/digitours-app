@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class DataBase {
   Box<bool> appSettingsBools;
   Box<AuthModel> authBox;
+  Box accessTokenBox;
 
   init() async {
     await Hive.initFlutter();
@@ -15,10 +16,11 @@ class DataBase {
   Future _initaliseBoxes() async {
     authBox = await Hive.openBox('authbox');
     appSettingsBools = await Hive.openBox('appsettingsbools');
+    accessTokenBox = await Hive.openBox('accesstokenbox');
   }
 
   void _registerAdapters() {
-    // Hive.registerAdapter(AuthModelAdapter());
+    Hive.registerAdapter(AuthModelAdapter());
   }
 }
 

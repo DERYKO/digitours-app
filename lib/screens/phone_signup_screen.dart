@@ -73,7 +73,7 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                         textinputtype: TextInputType.phone,
                       ),
                       SizedBox(
-                        height: 4,
+                        height: 8,
                       ),
                       Selector<AuthService, bool>(
                         selector: (context, authservice) =>

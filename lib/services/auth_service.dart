@@ -8,7 +8,9 @@ import 'package:flutter/cupertino.dart';
 class AuthService extends ChangeNotifier {
   bool get showOnboardScreens =>
       db.appSettingsBools.get('showonboardscreens', defaultValue: true);
+
   AuthModel get authUser => db.authBox.get('user');
+  String get accesstoken => db.accessTokenBox.get('accesstoken');
 
   bool _postingMobileLogin = false;
   bool get postingMobileLogin => _postingMobileLogin;
@@ -39,7 +41,7 @@ class AuthService extends ChangeNotifier {
   bool get verifyingPhoneNumber => _verifyingPhoneNumber;
 
   set verifyingPhoneNumber(bool val) {
-    _verifyingPhoneNumber = false;
+    _verifyingPhoneNumber = val;
     notifyListeners();
   }
 
@@ -47,12 +49,17 @@ class AuthService extends ChangeNotifier {
     verifyingPhoneNumber = true;
     return api.verifyPhone(phoneNumber, code).then((response) {
       var payload = response.data;
-      verifyingPhoneNumber = false;
+      _saveAccessToken(payload['token']);
       return payload;
     }).catchError((error) {
       verifyingPhoneNumber = false;
       print('ERROR OCCURED WHILE VERIFYING PHONE NUMBER');
     });
+  }
+
+  void _saveAccessToken(String token) {
+    db.accessTokenBox.put('accesstoken', token);
+    verifyingPhoneNumber = false;
   }
 }
 

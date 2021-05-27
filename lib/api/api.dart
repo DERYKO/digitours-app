@@ -19,6 +19,8 @@ class Api extends DioApi {
       "email": email,
     });
   }
+
+  
 }
 
 Api api = Api();

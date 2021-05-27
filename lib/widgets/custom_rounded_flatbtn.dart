@@ -13,14 +13,14 @@ class CustomRoundedFlatBtn extends StatelessWidget {
       @required this.onTap,
       this.labelText,
       this.btnWidget,
-      this.height,
+      this.height = 50.0,
       this.color = Colors.blue,
       this.textColor = Colors.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return MaterialButton(
       disabledColor: color.withOpacity(.5),
       height: height,
       onPressed: onTap,
@@ -29,7 +29,7 @@ class CustomRoundedFlatBtn extends StatelessWidget {
       color: color,
       textColor: textColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
+        borderRadius: BorderRadius.circular(25.0),
       ),
     );
   }

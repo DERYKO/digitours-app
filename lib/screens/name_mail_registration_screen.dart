@@ -1,3 +1,4 @@
+import 'package:digitours/routes.dart';
 import 'package:digitours/services/profile_update_service.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
@@ -15,8 +16,13 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
   TextEditingController _emailController = TextEditingController();
 
   void _submitBtnfunc() {
-    profileupdateservice.updateProfile(
-        _nameController.text, _emailController.text);
+    profileupdateservice
+        .updateProfile(_nameController.text, _emailController.text)
+        .then((response) {
+      if (response != null) {
+        Navigator.of(context).pushReplacementNamed(RouteConfig.homescreen);
+      }
+    });
   }
 
   @override

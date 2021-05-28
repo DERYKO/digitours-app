@@ -23,6 +23,10 @@ class Api extends DioApi {
   Future getTravelDestinations() {
     return dio.get('/travel-destination');
   }
+
+  Future getActivities() {
+    return dio.get('/activity');
+  }
 }
 
 Api api = Api();

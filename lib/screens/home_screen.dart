@@ -1,3 +1,5 @@
+import 'package:digitours/services/activity_service.dart';
+import 'package:digitours/widgets/activity_display_card.dart';
 import 'package:digitours/widgets/destination_display_card.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void callApis() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       travelDestinationsService.loadTravelDestinations();
+      activityservice.loadActivities();
     });
   }
 
@@ -53,11 +56,36 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 16,
             ),
             Divider(),
-            Expanded(child: PopularDestinationsWidget())
+            Flexible(flex: 1, child: ActivitiesWidget()),
+            SizedBox(
+              height: 8,
+            ),
+            Flexible(flex: 5, child: PopularDestinationsWidget())
           ],
         ),
       ),
     ));
+  }
+}
+
+class ActivitiesWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      physics: BouncingScrollPhysics(),
+      itemCount: activityservice.activites.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 4),
+          child: ActivityDisplayCard(
+            activity: activityservice.activites[index],
+            customHeight: 180,
+            customWidth: 200,
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -75,10 +103,10 @@ class PopularDestinationsWidget extends StatelessWidget {
             children: [
               Text(
                 'Popular Destinations',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1
-                    .copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+                style: Theme.of(context).textTheme.headline1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black),
               ),
               Icon(EvaIcons.optionsOutline),
             ],

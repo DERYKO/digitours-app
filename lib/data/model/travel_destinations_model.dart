@@ -6,19 +6,22 @@ class TravelDestinationModel {
   final String latitude;
   final String longitude;
   final String webUrl;
+  final List<String> tags;
   final List<TravelDestinationContactModel> contacts;
   final List<TravelDestinationGalleryModel> photos;
 
-  TravelDestinationModel(
-      {this.id,
-      this.name,
-      this.logo,
-      this.address,
-      this.latitude,
-      this.longitude,
-      this.webUrl,
-      this.contacts,
-      this.photos});
+  TravelDestinationModel({
+    this.id,
+    this.name,
+    this.logo,
+    this.address,
+    this.latitude,
+    this.longitude,
+    this.webUrl,
+    this.contacts,
+    this.photos,
+    this.tags,
+  });
 
   factory TravelDestinationModel.fromMap(traveldest) {
     return TravelDestinationModel(
@@ -36,6 +39,9 @@ class TravelDestinationModel {
       photos:
           traveldest['gallery'].map<TravelDestinationGalleryModel>((galitem) {
         return TravelDestinationGalleryModel.fromMap(galitem);
+      }).toList(),
+      tags: traveldest['tags'].map<String>((galitem) {
+        return galitem['activity']['name'] as String;
       }).toList(),
     );
   }

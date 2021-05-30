@@ -81,7 +81,7 @@ class ActivitiesWidget extends StatelessWidget {
           child: ActivityDisplayCard(
             activity: activityservice.activites[index],
             customHeight: 180,
-            customWidth: 200,
+            customWidth: 180,
           ),
         );
       },
@@ -115,10 +115,14 @@ class PopularDestinationsWidget extends StatelessWidget {
         Expanded(
           child: ListView.builder(
               itemCount: travelDestinationsService.traveldestinations.length,
+              physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return DestinationDisplayCard(
-                  traveldest:
-                      travelDestinationsService.traveldestinations[index],
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: DestinationDisplayCard(
+                    traveldest:
+                        travelDestinationsService.traveldestinations[index],
+                  ),
                 );
               }),
         )

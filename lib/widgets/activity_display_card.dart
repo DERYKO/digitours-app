@@ -14,18 +14,21 @@ class ActivityDisplayCard extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        ShaderMask(
-          blendMode: BlendMode.darken,
-          shaderCallback: (bounds) => LinearGradient(
-              begin: Alignment.centerLeft,
-              colors: [Colors.black45, Colors.black45]).createShader(bounds),
-          child: FadeInImage.assetNetwork(
-            placeholder: 'assets/images/placeholder.jpg',
-            image: activity.coverPhoto,
-            fit: BoxFit.cover,
-            fadeInCurve: Curves.easeIn,
-            height: customHeight,
-            width: customWidth,
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          child: ShaderMask(
+            blendMode: BlendMode.darken,
+            shaderCallback: (bounds) => LinearGradient(
+                begin: Alignment.centerLeft,
+                colors: [Colors.black45, Colors.black45]).createShader(bounds),
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/images/placeholder.jpg',
+              image: activity.coverPhoto,
+              fit: BoxFit.cover,
+              fadeInCurve: Curves.easeIn,
+              height: customHeight,
+              width: customWidth,
+            ),
           ),
         ),
         Align(

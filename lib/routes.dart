@@ -6,6 +6,7 @@ import 'package:digitours/screens/personalize_screen.dart';
 import 'package:digitours/screens/phone_signup_screen.dart';
 import 'package:digitours/screens/phone_verification_screen.dart';
 import 'package:digitours/screens/splash_screen.dart';
+import 'package:digitours/widgets/home_bottom_nav_screen.dart';
 
 class RouteConfig {
   static const splash = '/';
@@ -16,6 +17,7 @@ class RouteConfig {
   static const onboardingscreen = '/onboardingscreen';
   static const logodisplayscreen = '/logodisplayscreen';
   static const namemailregscreen = '/namemailregscreen';
+  static const homeBottomNav = 'homebottomnav';
 }
 
 var routes = {
@@ -26,5 +28,6 @@ var routes = {
   RouteConfig.personalizescreen: (context) => PersonalIzeScreen(),
   RouteConfig.onboardingscreen: (context) => OnboardingScreen(),
   RouteConfig.logodisplayscreen: (context) => LogoDisplayScreen(),
-  RouteConfig.namemailregscreen: (context) => NameMailRegScreen()
+  RouteConfig.namemailregscreen: (context) => NameMailRegScreen(),
+  RouteConfig.homeBottomNav: (context) => HomeBotttomNav(),
 };

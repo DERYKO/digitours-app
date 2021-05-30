@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else if (authservice.authUser == null) {
       Navigator.of(context).pushReplacementNamed(RouteConfig.phonesignupscreen);
     } else {
-      Navigator.of(context).pushReplacementNamed(RouteConfig.homescreen);
+      Navigator.of(context).pushReplacementNamed(RouteConfig.homeBottomNav);
     }
   }
 

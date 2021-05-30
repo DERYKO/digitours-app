@@ -10,12 +10,22 @@ class DestinationDisplayCard extends StatelessWidget {
     return traveldest.photos.isNotEmpty
         ? Stack(
             children: [
-              FadeInImage.assetNetwork(
-                placeholder: 'assets/images/placeholder.jpg',
-                image: traveldest?.photos?.first?.filePath,
-                height: 250,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: ShaderMask(
+                  blendMode: BlendMode.darken,
+                  shaderCallback: (bounds) => LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          colors: [Colors.black54, Colors.transparent])
+                      .createShader(bounds),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/placeholder.jpg',
+                    image: traveldest?.photos?.first?.filePath,
+                    height: 250,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Positioned(
                   left: 20,

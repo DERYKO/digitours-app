@@ -1,3 +1,4 @@
+import 'package:digitours/routes.dart';
 import 'package:digitours/services/activity_service.dart';
 import 'package:digitours/widgets/activity_display_card.dart';
 import 'package:digitours/widgets/destination_display_card.dart';
@@ -117,11 +118,21 @@ class PopularDestinationsWidget extends StatelessWidget {
               itemCount: travelDestinationsService.traveldestinations.length,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: DestinationDisplayCard(
-                    traveldest:
-                        travelDestinationsService.traveldestinations[index],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        RouteConfig.destinationinfomationscreen,
+                        arguments: {
+                          'destination': travelDestinationsService
+                              .traveldestinations[index]
+                        });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: DestinationDisplayCard(
+                      traveldest:
+                          travelDestinationsService.traveldestinations[index],
+                    ),
                   ),
                 );
               }),

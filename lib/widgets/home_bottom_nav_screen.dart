@@ -26,19 +26,40 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(EvaIcons.homeOutline),
+        child: Icon(
+          Icons.home_outlined,
+          size: 25,
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        elevation: 5,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Icon(EvaIcons.heartOutline),
-              Icon(EvaIcons.searchOutline),
-              Icon(EvaIcons.bookmarkOutline),
-              Icon(EvaIcons.personOutline),
+              Icon(
+                Icons.favorite_border_outlined,
+                color: Colors.blue,
+              ),
+              Icon(
+                EvaIcons.searchOutline,
+                color: Colors.blue,
+              ),
+              // FloatingActionButton(
+              //   onPressed: () {},
+              //   child: Icon(EvaIcons.homeOutline),
+              // ),
+              Icon(
+                EvaIcons.bookmarkOutline,
+                color: Colors.blue,
+              ),
+              Icon(
+                EvaIcons.personOutline,
+                color: Colors.blue,
+              ),
             ],
           ),
         ),

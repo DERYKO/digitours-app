@@ -15,7 +15,7 @@ class ActivityDisplayCard extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           child: ShaderMask(
             blendMode: BlendMode.darken,
             shaderCallback: (bounds) => LinearGradient(

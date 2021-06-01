@@ -1,3 +1,4 @@
+import 'package:digitours/widgets/custom_ratings.dart';
 import 'package:flutter/material.dart';
 import 'package:digitours/data/model/travel_destinations_model.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -56,10 +57,13 @@ class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
                           style: Theme.of(context).textTheme.headline3.copyWith(
                               color: Colors.black,
                               fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        )
+                              fontWeight: FontWeight.bold),
+                        ),
                       ],
-                    )
+                    ),
+                    Expanded(
+                        child: Container(
+                            height: 200, width: 200, child: CustomRatings()))
                   ],
                 )
               ],

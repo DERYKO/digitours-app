@@ -1,9 +1,13 @@
+import 'package:digitours/data/database.dart';
+import 'package:digitours/services/favourites_service.dart';
 import 'package:digitours/widgets/custom_ratings.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:flutter/material.dart';
 import 'package:digitours/data/model/travel_destinations_model.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:digitours/widgets/custom_swipper_widget.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class DestinationInfoScreen extends StatefulWidget {
   @override
@@ -21,11 +25,27 @@ class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [
-            IconButton(
-              icon: Icon(EvaIcons.heartOutline),
-              onPressed: () {},
-              splashColor: Colors.red[100],
-            )
+            ValueListenableBuilder(
+                valueListenable: db.favouritedestidsBox.listenable(),
+                builder: (context, Box box, _) {
+                  return IconButton(
+                    icon: box.values.contains(dest.id)
+                        ? Icon(
+                            Icons.favorite_rounded,
+                            color: Colors.red,
+                          )
+                        : Icon(
+                            Icons.favorite_border_rounded,
+                            color: Colors.red,
+                          ),
+                    onPressed: () {
+                      box.values.contains(dest.id)
+                          ? favouriteService.removeFavourite(dest.id)
+                          : favouriteService.setFavourite(dest.id);
+                    },
+                    splashColor: Colors.red[100],
+                  );
+                })
           ],
           elevation: 0,
           title: Text(

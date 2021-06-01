@@ -1,3 +1,4 @@
+import 'package:digitours/screens/favourites_screen.dart';
 import 'package:digitours/screens/home_screen.dart';
 import 'package:digitours/screens/logo_display_screen.dart';
 import 'package:digitours/screens/name_mail_registration_screen.dart';
@@ -20,6 +21,7 @@ class RouteConfig {
   static const namemailregscreen = '/namemailregscreen';
   static const homeBottomNav = 'homebottomnav';
   static const destinationinfomationscreen = 'destinationinfomationscreen';
+  static const favouritesscreen = '/favouritesscreen';
 }
 
 var routes = {
@@ -33,4 +35,5 @@ var routes = {
   RouteConfig.namemailregscreen: (context) => NameMailRegScreen(),
   RouteConfig.homeBottomNav: (context) => HomeBotttomNav(),
   RouteConfig.destinationinfomationscreen: (context) => DestinationInfoScreen(),
+  RouteConfig.favouritesscreen: (context) => FavouritesScreen()
 };

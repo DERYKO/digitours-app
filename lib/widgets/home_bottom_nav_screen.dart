@@ -1,3 +1,4 @@
+import 'package:digitours/screens/favourites_screen.dart';
 import 'package:digitours/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -10,7 +11,7 @@ class HomeBotttomNav extends StatefulWidget {
 class _HomeBotttomNavState extends State<HomeBotttomNav> {
   int _currentPageIndex = 0;
 
-  set changeTabFn(int pageIndex) {
+  void changeTabFn(int pageIndex) {
     setState(() {
       _currentPageIndex = pageIndex;
     });
@@ -18,6 +19,7 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
 
   List _pages = [
     HomeScreen(),
+    FavouritesScreen(),
   ];
 
   @override
@@ -25,7 +27,9 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          changeTabFn(0);
+        },
         child: Icon(
           Icons.home_outlined,
           size: 25,
@@ -40,9 +44,14 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Icon(
-                Icons.favorite_border_outlined,
-                color: Colors.blue,
+              GestureDetector(
+                onTap: () {
+                  changeTabFn(1);
+                },
+                child: Icon(
+                  Icons.favorite_border_outlined,
+                  color: Colors.blue,
+                ),
               ),
               Icon(
                 EvaIcons.searchOutline,

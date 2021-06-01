@@ -6,6 +6,7 @@ class DataBase {
   Box<bool> appSettingsBools;
   Box<AuthModel> authBox;
   Box accessTokenBox;
+  Box favouritedestidsBox;
 
   init() async {
     await Hive.initFlutter();
@@ -17,6 +18,7 @@ class DataBase {
     authBox = await Hive.openBox('authbox');
     appSettingsBools = await Hive.openBox('appsettingsbools');
     accessTokenBox = await Hive.openBox('accesstokenbox');
+    favouritedestidsBox = await Hive.openBox("favouritedestidsBox");
   }
 
   void _registerAdapters() {

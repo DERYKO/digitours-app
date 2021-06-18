@@ -32,10 +32,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         valueListenable: db.favouritedestidsBox.listenable(),
         builder: (context, Box box, _) {
           List<TravelDestinationModel> travelDest = [];
-          box.values.toList().forEach((favId) {
-            travelDest.add(travelDestinationsService.traveldestinations
-                .firstWhere((element) => element.id == favId));
-          });
+          if (travelDestinationsService.traveldestinations.isNotEmpty)
+            box.values.toList().forEach((favId) {
+              travelDest.add(travelDestinationsService.traveldestinations
+                  .firstWhere((element) => element.id == favId));
+            });
 
           return ListView.builder(
             padding: EdgeInsets.all(8),

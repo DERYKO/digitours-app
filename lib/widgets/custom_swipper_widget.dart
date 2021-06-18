@@ -13,6 +13,7 @@ class CustomSwipperWidget extends StatelessWidget {
       itemWidth: MediaQuery.of(context).size.width - 2 * 64,
       itemHeight: MediaQuery.of(context).size.height * 0.25,
       layout: SwiperLayout.STACK,
+      autoplay: true,
       itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(15)),

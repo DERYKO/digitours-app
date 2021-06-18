@@ -1,5 +1,7 @@
 import 'package:digitours/screens/favourites_screen.dart';
 import 'package:digitours/screens/home_screen.dart';
+import 'package:digitours/services/activity_service.dart';
+import 'package:digitours/services/travel_destinations_service.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
@@ -21,6 +23,19 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
     HomeScreen(),
     FavouritesScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    callApis();
+  }
+
+  void callApis() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      travelDestinationsService.loadTravelDestinations();
+      activityservice.loadActivities();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

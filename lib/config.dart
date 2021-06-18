@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Config {
   // static String appUrl = "https://digitours.co.ke/mobile";
-  static String appUrl = "http://159.89.88.97/mobile";
+  static String appUrl = "http://143.198.169.255/mobile";
   static ThemeData themedata = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primarySwatch: Colors.blue,

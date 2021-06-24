@@ -19,8 +19,9 @@ class TravelDestinationsService extends ChangeNotifier {
       var payload = response.data;
       _saveTravelDestinations(payload);
       return payload;
-    }).catchError((error) {
+    }).catchError((error, stack) {
       print('ERROR OCCURED WHILE LOADING TRAVEL DESTINATINONS $error');
+      print(stack);
       isGettingTravelDest = false;
     });
   }

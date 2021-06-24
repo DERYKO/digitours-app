@@ -32,6 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 traveldestinationservice.isGettingTravelDest,
             builder: (context, gettingTravel, _) {
               return CircularMaterialSpinner(
+                color: Colors.blue,
+                height: 50,
+                width: 50,
                 loading: gettingTravel,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,19 +42,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 32,
                     ),
-                    Text(
-                      'Hi ${authservice.authUser.name},\nWelcome to DigiTours',
-                      style: Theme.of(context).textTheme.headline1.copyWith(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      'Enjoy a world of pure beauty.',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3
-                          .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hi ${authservice.authUser.name},\nWelcome to DigiTours',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline1
+                                  .copyWith(
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              'Enjoy a world of pure beauty.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey.withOpacity(.2),
+                              border: Border.all(color: Colors.grey, width: 2)),
+                        )
+                      ],
                     ),
                     SizedBox(
                       height: 16,

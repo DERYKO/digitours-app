@@ -1,3 +1,5 @@
+import 'package:digitours/data/model/travel_cost_model.dart';
+
 class TravelDestinationModel {
   final int id;
   final String name;
@@ -88,14 +90,36 @@ class TravelDestinationGalleryModel {
 class TravelDestinationPackageModel {
   final int id;
   final String description;
+  final List<TravelCostModel> packageCosts;
+  final String exclusive;
+  final String inclusive;
+  final String itinerary;
+  final String policy;
+  final String requirement;
 
   TravelDestinationPackageModel({
     this.id,
     this.description,
+    this.packageCosts,
+    this.exclusive,
+    this.inclusive,
+    this.itinerary,
+    this.policy,
+    this.requirement,
   });
 
   factory TravelDestinationPackageModel.fromMap(package) {
     return TravelDestinationPackageModel(
-        id: package["id"], description: package['description']);
+        id: package["id"],
+        description: package['description'],
+        exclusive: package['package_exclusive']['exclusive'],
+        inclusive: package['package_inclusive']['inclusive'],
+        itinerary: package['package_itinerary']['itinerary'],
+        policy: package['package_policy']['policy'],
+        requirement: package['package_requirement']['requirements'],
+        packageCosts:
+            package['package_cost'].map<TravelCostModel>((travelCost) {
+          return TravelCostModel.fromMap(travelCost);
+        }).toList());
   }
 }

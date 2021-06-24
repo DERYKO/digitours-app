@@ -1,5 +1,7 @@
 import 'package:digitours/screens/favourites_screen.dart';
 import 'package:digitours/screens/home_screen.dart';
+import 'package:digitours/screens/profile_screen.dart';
+import 'package:digitours/screens/search_screen.dart';
 import 'package:digitours/services/activity_service.dart';
 import 'package:digitours/services/travel_destinations_service.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,8 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
   List _pages = [
     HomeScreen(),
     FavouritesScreen(),
+    SearchScreen(),
+    ProfileScreen()
   ];
 
   @override
@@ -68,21 +72,30 @@ class _HomeBotttomNavState extends State<HomeBotttomNav> {
                   color: Colors.blue,
                 ),
               ),
-              Icon(
-                EvaIcons.searchOutline,
-                color: Colors.blue,
+              GestureDetector(
+                onTap: () {
+                  changeTabFn(2);
+                },
+                child: Icon(
+                  EvaIcons.searchOutline,
+                  color: Colors.blue,
+                ),
               ),
-              // FloatingActionButton(
-              //   onPressed: () {},
-              //   child: Icon(EvaIcons.homeOutline),
-              // ),
+              SizedBox(
+                width: 8,
+              ),
               Icon(
                 EvaIcons.bookmarkOutline,
                 color: Colors.blue,
               ),
-              Icon(
-                EvaIcons.personOutline,
-                color: Colors.blue,
+              GestureDetector(
+                onTap: () {
+                  changeTabFn(3);
+                },
+                child: Icon(
+                  EvaIcons.personOutline,
+                  color: Colors.blue,
+                ),
               ),
             ],
           ),

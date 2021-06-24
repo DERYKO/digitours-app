@@ -1,5 +1,6 @@
 import 'package:digitours/data/database.dart';
 import 'package:digitours/services/favourites_service.dart';
+
 import 'package:digitours/widgets/custom_ratings.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class DestinationInfoScreen extends StatefulWidget {
   _DestinationInfoScreenState createState() => _DestinationInfoScreenState();
 }
 
+final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
         ModalRoute.of(context).settings.arguments;
     TravelDestinationModel dest = arguments['destination'];
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -143,13 +147,17 @@ class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
                       ),
                       Flexible(
                         flex: 1,
-                        child: CustomRoundedFlatBtn(
-                          height: 40,
-                          onTap: () {
-                            openbookingBottomSheet(context);
+                        child: Builder(
+                          builder: (context) {
+                            return CustomRoundedFlatBtn(
+                              height: 40,
+                              onTap: () {
+                                openbookingBottomSheet(context);
+                              },
+                              btnWidget: Text('Book Travel'),
+                              color: Colors.orangeAccent,
+                            );
                           },
-                          btnWidget: Text('Book Travel'),
-                          color: Colors.orangeAccent,
                         ),
                       )
                     ],
@@ -230,6 +238,7 @@ class _BookingsCardWidgetState extends State<BookingsCardWidget> {
                 itemBuilder: (context, index) {
                   return CustomRoundedFlatBtn(
                     width: 200,
+                    height: 25,
                     onTap: () {
                       setState(() {
                         selectedPackageIndex = index;
@@ -255,12 +264,26 @@ class _BookingsCardWidgetState extends State<BookingsCardWidget> {
             height: 16,
           ),
           widget.traveldest.package.isNotEmpty
-              ? Text(
-                  "${widget.traveldest.package[selectedPackageIndex].description}",
-                  style: Theme.of(context).textTheme.headline3.copyWith(
-                      color: Colors.grey,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold))
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Exclusive',
+                      style: Theme.of(context).textTheme.headline1.copyWith(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    // htmlParser(widget
+                    //     .traveldest.package[selectedPackageIndex].exclusive),
+                    // Text(
+                    //     "${(widget.traveldest.package[selectedPackageIndex].exclusive)}",
+                    //     style: Theme.of(context).textTheme.headline3.copyWith(
+                    //         color: Colors.grey,
+                    //         fontSize: 15,
+                    //         fontWeight: FontWeight.bold)),
+                  ],
+                )
               : SizedBox()
         ],
       ),
@@ -268,18 +291,20 @@ class _BookingsCardWidgetState extends State<BookingsCardWidget> {
   }
 }
 
-Future openbookingBottomSheet(BuildContext context) {
-  return showModalBottomSheet(
+openbookingBottomSheet(BuildContext context) {
+  return showBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30), topRight: Radius.circular(30)),
       ),
       builder: (context) {
-        return Container(
-          child: Center(
-            child: Text("Booking Modal"),
-          ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             ListView(),
+             
+           ],
         );
       });
 }

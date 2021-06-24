@@ -1,14 +1,15 @@
-import 'package:digitours/data/database.dart';
-import 'package:digitours/services/favourites_service.dart';
-
-import 'package:digitours/widgets/custom_ratings.dart';
-import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
-import 'package:flutter/material.dart';
-import 'package:digitours/data/model/travel_destinations_model.dart';
+import 'package:digitours/utils/parse_html.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:digitours/widgets/custom_swipper_widget.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:digitours/data/database.dart';
+import 'package:digitours/data/model/travel_destinations_model.dart';
+import 'package:digitours/services/favourites_service.dart';
+import 'package:digitours/widgets/custom_ratings.dart';
+import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
+import 'package:digitours/widgets/custom_swipper_widget.dart';
 
 class DestinationInfoScreen extends StatefulWidget {
   @override
@@ -152,7 +153,9 @@ class _DestinationInfoScreenState extends State<DestinationInfoScreen> {
                             return CustomRoundedFlatBtn(
                               height: 40,
                               onTap: () {
-                                openbookingBottomSheet(context);
+                                if (dest.package.isNotEmpty) {
+                                  openbookingBottomSheet(context, dest);
+                                }
                               },
                               btnWidget: Text('Book Travel'),
                               color: Colors.orangeAccent,
@@ -267,21 +270,8 @@ class _BookingsCardWidgetState extends State<BookingsCardWidget> {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Exclusive',
-                      style: Theme.of(context).textTheme.headline1.copyWith(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    // htmlParser(widget
-                    //     .traveldest.package[selectedPackageIndex].exclusive),
-                    // Text(
-                    //     "${(widget.traveldest.package[selectedPackageIndex].exclusive)}",
-                    //     style: Theme.of(context).textTheme.headline3.copyWith(
-                    //         color: Colors.grey,
-                    //         fontSize: 15,
-                    //         fontWeight: FontWeight.bold)),
+                    Text('${widget.traveldest.package[0].description}'),
+                    
                   ],
                 )
               : SizedBox()
@@ -291,7 +281,8 @@ class _BookingsCardWidgetState extends State<BookingsCardWidget> {
   }
 }
 
-openbookingBottomSheet(BuildContext context) {
+openbookingBottomSheet(
+    BuildContext context, TravelDestinationModel traveldest) {
   return showBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -301,10 +292,97 @@ openbookingBottomSheet(BuildContext context) {
       builder: (context) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             ListView(),
-             
-           ],
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 35,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                        itemCount: traveldest?.package?.length ?? 0,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return CustomRoundedFlatBtn(
+                            width: 200,
+                            height: 25,
+                            onTap: () {},
+                            color: Colors.blue,
+                            btnWidget: Text(
+                              'Package ${index + 1}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    TitleHtmlcolumn(
+                      title: "Exclusive",
+                      htmldata: traveldest.package[0].exclusive,
+                    ),
+                    TitleHtmlcolumn(
+                      title: "Inclusive",
+                      htmldata: traveldest.package[0].inclusive,
+                    ),
+                    TitleHtmlcolumn(
+                      title: "Itinerary",
+                      htmldata: traveldest.package[0].itinerary,
+                    ),
+                    TitleHtmlcolumn(
+                      title: "Requirements",
+                      htmldata: traveldest.package[0].requirement,
+                    ),
+                    TitleHtmlcolumn(
+                      title: "Policy",
+                      htmldata: traveldest.package[0].policy,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomRoundedFlatBtn(
+                onTap: () {},
+                btnWidget: Text('Book Travel'),
+                color: Colors.orangeAccent,
+              ),
+            )
+          ],
         );
       });
+}
+
+class TitleHtmlcolumn extends StatelessWidget {
+  final String title;
+  final String htmldata;
+  const TitleHtmlcolumn({
+    Key key,
+    this.title,
+    this.htmldata,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            '$title',
+            style: Theme.of(context).textTheme.headline1.copyWith(
+                fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ),
+        htmlParser(htmldata),
+      ],
+    );
+  }
 }

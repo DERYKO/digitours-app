@@ -1,5 +1,6 @@
 import 'package:digitours/routes.dart';
 import 'package:digitours/services/auth_service.dart';
+import 'package:digitours/utils/toast_util.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:digitours/widgets/customtxt_input.dart';
@@ -22,6 +23,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
       if (value != null) {
         Navigator.of(context)
             .pushReplacementNamed(RouteConfig.personalizescreen);
+      } else {
+        showtoast('OTP code not valid');
       }
     });
   }

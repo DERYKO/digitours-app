@@ -1,5 +1,6 @@
 import 'package:digitours/routes.dart';
 import 'package:digitours/services/auth_service.dart';
+import 'package:digitours/utils/toast_util.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:digitours/widgets/customtxt_input.dart';
@@ -15,12 +16,18 @@ class _PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
   TextEditingController _phoneInputController = TextEditingController();
 
   void _onPhoneConfirmedFn() {
-    authservice.mobileLogin(_phoneInputController.text).then((value) {
-      if (value != null) {
-        Navigator.of(context)
-            .pushReplacementNamed(RouteConfig.phoneverificationscreen);
-      }
-    });
+    if (_phoneInputController.text.length < 10) {
+      showtoast('kindly enter a valid phone number');
+    } else {
+      authservice.mobileLogin(_phoneInputController.text).then((value) {
+        if (value != null) {
+          Navigator.of(context)
+              .pushReplacementNamed(RouteConfig.phoneverificationscreen);
+        } else {
+          showtoast("Could'nt Send OTP");
+        }
+      });
+    }
   }
 
   @override

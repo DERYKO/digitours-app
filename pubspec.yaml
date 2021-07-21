@@ -31,6 +31,8 @@ dependencies:
   flutter_swiper: ^1.1.6
   eva_icons_flutter: ^2.0.1
   flutter_html: ^1.2.0
+  fluttertoast: ^7.1.8
+  image_picker: ^0.6.7+22
 
 
 

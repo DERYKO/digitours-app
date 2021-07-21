@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +9,7 @@ import 'package:digitours/services/profile_update_service.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:digitours/widgets/customtxt_input.dart';
+import 'package:digitours/utils/image_picker_util.dart';
 
 class NameMailRegScreen extends StatefulWidget {
   @override
@@ -120,41 +123,48 @@ class ProfilePhotoStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle, color: Colors.transparent),
-          child: Container(
-            constraints: BoxConstraints.tight(
-              Size(100, 100),
-            ),
+    File image;
+    return GestureDetector(
+      onTap: () {
+        image = getImage();
+      },
+      child: Stack(
+        children: [
+          Container(
+            height: 200,
+            width: 200,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey.withOpacity(.2),
-                border: Border.all(color: Colors.grey, width: 2)),
-          ),
-        ),
-        Positioned(
-          right: 0,
-          bottom: 0,
-          child: RawMaterialButton(
-            fillColor: Theme.of(context).primaryColor,
-            onPressed: addBtnFunc,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                EvaIcons.plusOutline,
-                size: 35,
-                color: Colors.white,
+                shape: BoxShape.rectangle, color: Colors.transparent),
+            child: Container(
+              constraints: BoxConstraints.tight(
+                Size(100, 100),
               ),
+              child: image != null ? Image.file(image) : SizedBox(),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey.withOpacity(.2),
+                  border: Border.all(color: Colors.grey, width: 2)),
             ),
-            shape: CircleBorder(),
           ),
-        )
-      ],
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: RawMaterialButton(
+              fillColor: Theme.of(context).primaryColor,
+              onPressed: addBtnFunc,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  EvaIcons.plusOutline,
+                  size: 35,
+                  color: Colors.white,
+                ),
+              ),
+              shape: CircleBorder(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

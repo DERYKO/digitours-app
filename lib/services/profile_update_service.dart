@@ -13,9 +13,9 @@ class ProfileUpdateService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateProfile(name, email) {
+  Future updateProfile(name, email, photo) {
     isUpdatingProfile = true;
-    return api.updateProfile(name, email).then((response) {
+    return api.updateProfile(name, email, photo).then((response) {
       var payload = response.data;
       _saveUserData(payload['user']);
       return payload;

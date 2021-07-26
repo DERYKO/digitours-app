@@ -33,6 +33,7 @@ dependencies:
   flutter_html: ^1.2.0
   fluttertoast: ^7.1.8
   image_picker: ^0.6.7+22
+  geolocator: ^6.2.1
 
 
 

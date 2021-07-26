@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:digitours/api/dio.dart';
+import 'package:dio/dio.dart';
+
 import 'package:digitours/config.dart';
 
 class Api extends DioApi {
@@ -13,11 +17,13 @@ class Api extends DioApi {
         .post('/code', queryParameters: {'code': code, 'phone': phoneNumber});
   }
 
-  Future updateProfile(String name, String email) {
-    return dio.post('/user', data: {
-      "name": name,
-      "email": email,
-    });
+  Future updateProfile(
+    String name,
+    String email,
+    File photo,
+  ) {
+    return dio.post('/user',
+        data: FormData.fromMap({"name": name, "email": email, 'photo': photo}));
   }
 
   Future getTravelDestinations() {

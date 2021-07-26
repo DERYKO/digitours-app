@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import 'package:digitours/routes.dart';
 import 'package:digitours/services/profile_update_service.dart';
+import 'package:digitours/utils/image_picker_util.dart';
 import 'package:digitours/widgets/circular_material_spinner.dart';
 import 'package:digitours/widgets/custom_rounded_flatbtn.dart';
 import 'package:digitours/widgets/customtxt_input.dart';
-import 'package:digitours/utils/image_picker_util.dart';
 
 class NameMailRegScreen extends StatefulWidget {
   @override
@@ -21,9 +22,11 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
 
+  File image;
+
   void _submitBtnfunc() {
     profileupdateservice
-        .updateProfile(_nameController.text, _emailController.text)
+        .updateProfile(_nameController.text, _emailController.text, image)
         .then((response) {
       if (response != null) {
         Navigator.of(context).pushReplacementNamed(RouteConfig.homeBottomNav);
@@ -31,7 +34,10 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
     });
   }
 
-  void addProfilePhotoFunc() {}
+  void takePhotoFn() async {
+    image = await getImage().then((value) => File(value.path));
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,10 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ProfilePhotoStack(),
+                      ProfilePhotoStack(
+                        takePhotoFn: takePhotoFn,
+                        image: image,
+                      ),
                       SizedBox(
                         height: 8,
                       ),
@@ -116,18 +125,21 @@ class _NameMailRegScreenState extends State<NameMailRegScreen> {
 
 class ProfilePhotoStack extends StatelessWidget {
   final Function addBtnFunc;
+  final Function takePhotoFn;
+  final File image;
+
   const ProfilePhotoStack({
     Key key,
     this.addBtnFunc,
+    this.takePhotoFn,
+    this.image,
   }) : super(key: key);
 
   @override
+  @override
   Widget build(BuildContext context) {
-    File image;
     return GestureDetector(
-      onTap: () {
-        image = getImage();
-      },
+      onTap: takePhotoFn,
       child: Stack(
         children: [
           Container(
@@ -139,7 +151,15 @@ class ProfilePhotoStack extends StatelessWidget {
               constraints: BoxConstraints.tight(
                 Size(100, 100),
               ),
-              child: image != null ? Image.file(image) : SizedBox(),
+              child: image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      child: Image.file(
+                        File(image.path),
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ))
+                  : SizedBox(),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.grey.withOpacity(.2),
